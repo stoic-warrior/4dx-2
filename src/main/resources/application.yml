@@ -1,0 +1,17 @@
+spring:
+  datasource: # 데이터베이스 연결 정보
+    url: jdbc:mysql://localhost:3306/wigdb?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=Asia/Seoul
+    username: root  # 로그인 계정. 실무에선 root계정 금지
+    password: root # docker-compose에서 설정한 password랑 같아야 함
+    driver-class-name: com.mysql.cj.jdbc.Driver #jdbc 드라이버 클래스 이름. jdbc는 스프링과 mysql사이의 통역사
+  jpa: # 자바 객체를 DB테이블에 자동으로 매핑 해주는 표준 인터페이스, 자바 객체를 보고 SQL를 자동 생성해서 DB테이블과 동기화
+    hibernate: # jpa 구현체
+      ddl-auto: update # 엔티티 변경사항을 자동으로 DB에 반영. 개발중에만 사용, 운영중엔 사용x
+    properties:
+      hibernate.format_sql: true # 콘솔에 출력되는 SQL을 가독성있게 포맷팅해서 보여줌
+    open-in-view: false # jpa세션을 view(컨트롤러 이후)까지 열어두는 기능을 끈다. 이것이 지연로딩에는 편해도, 성능저하와 N+1문제를 초래하기 때문이다
+logging.level.org.hibernate.SQL: debug # SQL 쿼리를 콘솔에 출력하는 로그레벨 설정
+# org.hibernate.SQL : SQL 쿼리를 출력하는 로거
+# debug # 쿼리를 자세히 보여줌
+
+
