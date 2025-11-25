@@ -19,7 +19,7 @@ import java.time.LocalDateTime;
 @Builder // 필드가 많은 객체를 안전하고 가독성있게 생성하는 디자인 패턴
 public class WigResponseDto {
 
-    private Long id;
+    private Long id; // 영속화 전에 null값을 허용해야 하기 때문에 long이 아닌 Long을 사용
     private String goal;
     private String description;
     // 나중에 추가할 필드들
