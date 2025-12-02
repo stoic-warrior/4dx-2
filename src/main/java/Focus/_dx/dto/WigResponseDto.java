@@ -12,6 +12,7 @@ import java.time.LocalDateTime;
  * WIG 응답 DTO
  * Entity를 직접 노출하지 않고 API 응답으로 내보내는 객체
  * 클라이언트에게 필요한 정보만 선택적으로 노출
+ * “엔티티를 외부 세계(API 응답)로 안전하게 노출하기 위한 출력 전용 DTO”
  */
 @Getter
 @NoArgsConstructor

@@ -8,22 +8,24 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
+
 import java.util.HashMap;
 import java.util.Map;
 
 /**
  * 전역 예외 처리 핸들러
  * 모든 Controller에서 발생하는 예외를 한 곳에서 처리
+ * “컨트롤러 전체에 공통 방패를 씌우고, 예외마다 다른 방패를 들이대는 클래스”
  * @RestControllerAdvice = @ControllerAdvice + @ResponseBody
  */
-@RestControllerAdvice
+@RestControllerAdvice // 프로젝트 전체 Controller에서 발생하는 예외를 가로채, JSON응답
 public class GlobalExceptionHandler {
 
     /**
      * WigNotFoundException 처리
      * WIG을 찾을 수 없을 때 404 Not Found 응답
      */
-    @ExceptionHandler(WigNotFoundException.class)
+    @ExceptionHandler(WigNotFoundException.class) // Controller 어느 곳에서든 WigNotFoundException 터지면 → 이 메서드가 자동 실행됨
     public ResponseEntity<ErrorResponse> handleWigNotFound(WigNotFoundException ex) {
         ErrorResponse error = ErrorResponse.of(
                 HttpStatus.NOT_FOUND.value(),
@@ -41,7 +43,7 @@ public class GlobalExceptionHandler {
      *
      * 예: @Size(min=5) 위반 시
      */
-    @ExceptionHandler(MethodArgumentNotValidException.class)
+    @ExceptionHandler(MethodArgumentNotValidException.class) // @Valid 검증 실패
     public ResponseEntity<Map<String, Object>> handleValidationExceptions(
             MethodArgumentNotValidException ex) {
 
